@@ -1,0 +1,29 @@
+<div fxLayout="column" fxLayout.gt-sm="row wrap">
+  <div fxFlex="100" class="flex-p">
+      <mat-card>
+          <mat-card-header fxLayoutAlign="space-between center">
+              <mat-card-title> {{title}} - {{variedad}} - {{centro}}</mat-card-title>
+              <mat-card-subtitle> {{temporada}}</mat-card-subtitle>
+              <button (click)="close()" mat-icon-button>
+                  <mat-icon>close</mat-icon>
+              </button>
+          </mat-card-header>
+          <mat-card-content>
+              <ngx-charts-line-chart  
+              [results]="data?.series" 
+              [scheme]="colorScheme"
+              [gradient]="gradient" 
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis" 
+              [legend]="showLegend" 
+              [showXAxisLabel]="showXAxisLabel" 
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel" 
+              [yAxisLabel]="yAxisLabel"
+              >
+              </ngx-charts-line-chart>
+          </mat-card-content>
+      </mat-card>
+  </div>
+</div>
+

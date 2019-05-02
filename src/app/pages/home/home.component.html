@@ -1,0 +1,36 @@
+<mat-toolbar class="mat-elevation-z6" color="primary">
+  <mat-toolbar-row>
+    <div fxFlex="25%" align="star">
+    </div>
+    <h1 fxFlex="50%" align="center">HOME</h1>
+    <div fxFlex="25%" align="end">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>reorder</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="app-container">
+  <div fxLayout="column" fxLayoutAlign="center center" class="landing-header">
+    <p class="logo">ANA Chile</p>
+    <p class="intro-text">Resúmenes de temporada</p>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <a mat-raised-button color="accent" routerLink="/nectarines">Ver resúmenes</a>
+    </div>
+  </div>
+
+
+  <div class="bg-primary w-100" style="margin-top: 50px;">
+    <div fxLayout.xs="column" fxLayout.gt-xs="row wrap" fxLayoutAlign="space-between center" >
+      <!-- <span>Copyright ©2018 All Rights Reserved</span> -->
+      <span>Desarrollador: Pablo Cid (pablocid@agroinformatica.cl) - version 0.6.22</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+.landing-header{
+    position: relative;
+    color: #fff;
+    height: 520px;
+    text-align: center;
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 520px;
+        background-color: #242424;
+        background-image: url('../../../assets/img/header.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-y: center;
+        z-index: -1;
+    }
+    p{
+        margin-bottom: 1rem;
+    }
+    .logo{ 
+        font-size: 48px;        
+    }
+    .intro-text{
+        font-size: 36px;
+    }
+    .desc{
+        font-size: 16px;
+        font-weight: 300;
+        letter-spacing: 0.03rem;
+    }
+    .mat-raised-button{
+        margin: 0 14px;
+    }
+}

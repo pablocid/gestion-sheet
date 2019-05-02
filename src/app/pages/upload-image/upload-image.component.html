@@ -1,0 +1,37 @@
+<mat-toolbar class="mat-elevation-z6" color="primary">
+    <mat-toolbar-row>
+      <div fxFlex="25%" align="star">
+          <button mat-icon-button (click)="goBack()">
+              <mat-icon>arrow_back</mat-icon>
+            </button>
+      </div>
+      <h1 fxFlex="50%" align="center">Variedades</h1>
+      <div fxFlex="25%" align="end">
+        <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="toReverse()">
+            <mat-icon>reorder</mat-icon>
+            <span>Cambiar orden de plantas</span>
+          </button>
+          <button mat-menu-item (click)="updateList()">
+            <mat-icon>sync</mat-icon>
+            <span>Actualizar la lista</span>
+          </button>
+        </mat-menu> -->
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <div class="app-container">
+      <app-image-picker *ngIf="!loading" (selection)="selected($event)" label="Subir foto"> </app-image-picker>
+
+      <div *ngIf="response">
+        <h2>Nombre del archivo:</h2>
+        <h3> {{ response.key }} <button mat-icon-button (click)="copy()"> <mat-icon>file_copy</mat-icon></button></h3>
+        <img (click)="showImg(response)" [src]="response.thumbnail" alt="">
+      </div>
+
+      <mat-spinner *ngIf="loading"></mat-spinner>
+  </div>

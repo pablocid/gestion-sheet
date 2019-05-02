@@ -1,0 +1,121 @@
+<button (click)="captureScreen({id:'capt', name:'Extreme'})">CAPTURE</button>
+
+<div id="capt" class="main-print" style="width: 900px;">
+  <div style="height: 120px !important;">
+    <img class="logo-ana" style="width: 150px; padding-right: 10px;" src="assets/img/ana.jpg" alt="">
+
+    <div class="title" style="display: inline-block; width: 400px; padding:50px; text-align:center">
+      <h2> {{nectarin.cultivar}} - {{nectarin.centroName(i)}} {{nectarin.temporada}}</h2>
+    </div>
+    <img class="main-pic" *ngIf="nectarin.fotoPrincipal(i)" [src]="nectarin.fotoPrincipal(i)" style="display: inline-block; height: 100px;">
+  </div>
+  <table class="table-style">
+    <tr>
+      <th class="header">Especie </th>
+      <th class="header">Programa </th>
+      <th class="header">Año plantación </th>
+      <th class="header">Portainjerto </th>
+      <th class="header">Plantas/ha </th>
+      <th class="header">Distancia plantación</th>
+      <th class="header">Estatus evaluativo</th>
+    </tr>
+    <tr>
+      <td class="content-table">{{nectarin.especie}}</td>
+      <td class="content-table">{{nectarin.programa}} </td>
+      <td class="content-table">{{nectarin.centroProp('ano_plantacion',i)}} </td>
+      <td class="content-table">{{nectarin.centroProp('portainjerto', i)}}</td>
+      <td class="content-table">{{nectarin.centroProp('plantas_ha',i)}}</td>
+      <td class="content-table">{{nectarin.centroProp('marco_plantacion',i)}}</td>
+      <td class="content-table">{{nectarin.status_evaluativo}}</td>
+    </tr>
+    <tr>
+      <th class="header">Inicio floración (10%) </th>
+      <th class="header">Plena flor (80%) </th>
+      <th class="header">Floribunidad (flores/ml) </th>
+      <th class="header">Cuaja (frutos/ml) </th>
+      <th class="header">Nº frutos/planta </th>
+      <th class="header">Primera cosecha </th>
+      <th class="header">Vigor planta </th>
+      <th class="header">Producción (ton brutas/ha)</th>
+    </tr>
+    <tr>
+      <td class="content-table">{{nectarin.inicioFloracion(i) | date:'yyyy/M/d'}}</td>
+      <td class="content-table">{{nectarin.plenaFloracion(i) | date:'yyyy/M/d'}}</td>
+      <td class="content-table">{{nectarin.floresPorMetroLineal(i) | number: '1.0-1'}}</td>
+      <td class="content-table">{{nectarin.frutosCuajadosPorMetroLineal(i) | number: '1.0-1'}}</td>
+      <td class="content-table">{{nectarin.numeroFrutosPlanta(i) | number: '1.0-1'}}</td>
+      <td class="content-table">{{nectarin.inicioCosecha(i) | date:'yyyy/M/d'}}</td>
+      <td class="content-table">{{nectarin.vigor(i)}}</td>
+      <td class="content-table">{{nectarin.rendimientoTotal(i) | number: '1.0-1'}}</td>
+    </tr>
+  </table>
+
+  <div *ngFor="let c of nectarin.cosechas(i); let ic = index;">
+    <table class="table-style">
+      <tr>
+        <th class="header">Cosecha</th>
+        <th class="header">Forma</th>
+        <th class="header">Sobre color</th>
+        <th class="header">Color pulpa</th>
+        <th class="header">Sabor</th>
+        <th class="header">Calibre</th>
+        <th class="header">Pº ecuatorial</th>
+        <th class="header">Pto. blando</th>
+        <th class="header">SS</th>
+        <th class="header">Acidez,</th>
+        <th class="header">Defectos</th>
+        <th class="header">Obs.</th>
+      </tr>
+      <tr>
+        <td class="content-table">{{nectarin.fechaCosecha(i,ic) | date:'yyyy/M/d'}}</td>
+        <td class="content-table">{{nectarin.cosechaProp('forma_fruto', i, ic)}}</td>
+        <td class="content-table">{{nectarin.cosechaProp('color_cubrimiento', i, ic)}}
+          ({{nectarin.cosechaProp('porcentage_color',
+          i, ic)}}%)</td>
+        <td class="content-table">{{nectarin.cosechaProp('color_pulpa', i, ic)}}</td>
+        <td class="content-table">{{nectarin.cosechaProp('sabor', i, ic)}}</td>
+        <td class="content-table">{{nectarin.calibre(i,ic)}}</td>
+        <td class="content-table">{{nectarin.presionEcuatorial(i,ic) | number : '1.0-1'}} lb</td>
+        <td class="content-table">{{nectarin.puntoMasBlando(i,ic)?.value | number: '1.0-1'}} lb
+          ({{nectarin.puntoMasBlando(i,ic)?.index}})</td>
+        <td class="content-table">{{nectarin.brix(i,ic) | number: '1.0-1'}} ºBrix </td>
+        <td class="content-table">{{nectarin.acidez(i,ic) | number: '1.0-1'}}% (ac. málico) </td>
+        <td class="content-table defectos">
+          <span *ngFor="let defecto of nectarin.defectosCosecha(i,ic); let e = index;"> {{defecto.id}}
+            {{defecto.value | percent}}
+            <span *ngIf=" (e + 1) < nectarin.defectosCosecha(i,ic).length">,</span>
+          </span>
+        </td>
+        <td class="content-table">{{nectarin.cosechaProp('observaciones', i, ic)}}</td>
+      </tr>
+      <tr *ngIf="nectarin.postcosechasExist(i,ic)">
+        <th>Postcosecha </th>
+        <th colspan="2">Guarda (0ºC)</th>
+        <th>Pº ecuatorial </th>
+        <th colspan="2">Pto. + blando </th>
+        <th>SS </th>
+        <th colspan="2">Acidez </th>
+        <th colspan="3">Defectos </th>
+      </tr>
+      <tr *ngFor="let ptc of nectarin.postcosechas(i,ic); let ipc = index;">
+        <td class="content-table">{{ nectarin.fechaSalidaFrio(i,ic, ipc) | date:'yyyy/M/d' }} </td>
+        <td class="content-table" colspan="2">{{nectarin.diasGuarda(i,ic,ipc)}} días</td>
+        <td class="content-table">{{nectarin.presionEcuatorialPostcosecha(i,ic,ipc) | number:
+          '1.0-1'}} lb </td>
+        <td class="content-table" colspan="2">{{nectarin.puntoMasBlandoPostcosecha(i,ic,ipc)?.value |
+          number: '1.0-1'}} ({{nectarin.puntoMasBlandoPostcosecha(i,ic,ipc)?.index}})</td>
+        <td class="content-table">{{nectarin.brixPost(i,ic,ipc) | number: '1.0-1'}}ºBrix </td>
+        <td class="content-table" colspan="2">{{nectarin.acidezPost(i,ic,ipc) | number: '1.0-1'}}% (ac. málico) </td>
+        <td class="content-table defectos" colspan="3">
+          <span *ngFor="let defecto of nectarin.defectosPostcosecha(i,ic,ipc); let e = index;">
+            {{defecto.id}} {{defecto.value | percent}}
+            <span *ngIf=" (e + 1) < nectarin.defectosPostcosecha(i,ic,ipc).length">,</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+
+    <div style="height:20px; display:block"></div>
+  </div>
+
+</div>

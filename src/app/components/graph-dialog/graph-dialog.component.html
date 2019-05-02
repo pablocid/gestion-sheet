@@ -1,0 +1,25 @@
+<div fxLayout="column" fxLayout.gt-sm="row wrap">
+    <div fxFlex="100" class="flex-p">
+        <mat-card>
+            <mat-card-header fxLayoutAlign="space-between center">
+                <mat-card-title>{{title}} <br /> {{variedad}} - {{centro}}</mat-card-title>
+                <mat-card-subtitle>{{temporada}}</mat-card-subtitle>
+                <!-- <mat-card-subtitle> description</mat-card-subtitle> -->
+                <button (click)="close()" mat-icon-button>
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-card-header>
+            <mat-card-content>
+                <!-- <ngx-charts-line-chart [scheme]="colorScheme" [results]="series" [gradient]="gradient" [xAxis]="showXAxis"
+                    [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                    [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [autoScale]="autoScale">
+                </ngx-charts-line-chart> -->
+                <ngx-charts-bar-vertical [view]="view" [scheme]="colorScheme" [gradient]="gradient" [xAxis]="true"
+                    [yAxis]="true" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                    [legendTitle]="xAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [results]="single" [tooltipDisabled]="false">
+                </ngx-charts-bar-vertical>
+
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

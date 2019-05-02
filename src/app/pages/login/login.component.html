@@ -1,0 +1,46 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="row-height">
+
+    <!-- <mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="{{label}} To">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+
+    <mat-card class="mat-elevation-z24">
+        <mat-card-header>
+            <mat-card-title>Shiba Inu</mat-card-title>
+            <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card> -->
+
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxFlex="80" fxFlex.gt-sm="30" fxFlex.sm="60">
+
+        <mat-card class="mat-elevation-z24">
+            <mat-card-header>
+                <mat-card-title>Regístrate</mat-card-title>
+                <mat-card-subtitle>Introduce tu email y contraseña</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content fxLayout="column" fxLayoutAlign="end center">
+                <mat-form-field>
+                    <input matInput placeholder="Email" formControlName="email">
+                    <mat-error *ngIf="form.controls.email.errors?.required">Email es requerido</mat-error>
+                    <mat-error *ngIf="form.controls.email.hasError('invalidEmail')">Email inválido</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Password" type="password" formControlName="password">
+                    <mat-error *ngIf="form.controls.password.errors?.required">La contraseña es requerida</mat-error>
+                    <mat-error *ngIf="form.controls.password.hasError('minlength')">Password isn't long enough,
+                        minimum of 6 characters</mat-error>
+                </mat-form-field>
+
+
+            </mat-card-content>
+            <mat-card-actions fxLayout="column" fxLayoutAlign="end center">
+                <button mat-raised-button color="primary" class="mat-elevation-z5" type="submit">Ingresar</button>
+            </mat-card-actions>
+        </mat-card>
+
+    </form>
+
+</div>

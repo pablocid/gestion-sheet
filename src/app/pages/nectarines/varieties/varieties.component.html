@@ -1,0 +1,23 @@
+<mat-toolbar class="mat-elevation-z6" color="primary">
+  <mat-toolbar-row>
+    <div fxFlex="25%" align="star">
+        <div fxFlex="25%" align="star">
+            <button mat-icon-button (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+        </div>
+    </div>
+    <h1 fxFlex="50%" align="center">Variedades de {{ (season$ | async )?.especie}} {{ (season$ | async )?.temporada}}</h1>
+    <div fxFlex="25%" align="end">
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="app-container" fxLayout="row">
+  <app-autocomplete [list]="opts" (id)="varSelected($event)"></app-autocomplete>
+  <div style="width:100%">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

@@ -1,0 +1,57 @@
+<mat-toolbar class="mat-elevation-z6" color="primary">
+  <mat-toolbar-row>
+    <div fxFlex="25%" align="star">
+        <div fxFlex="25%" align="star">
+            <button mat-icon-button (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon>
+              </button>
+        </div>
+    </div>
+    <h1 fxFlex="50%" align="center">Evaluaciones de Nectarines por temporada</h1>
+    <div fxFlex="25%" align="end">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="goToUploadImage()">
+            <mat-icon>camera</mat-icon>
+            <span>Subir fotos</span>
+          </button>
+        </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+
+<div class="app-container">
+
+  <div fxLayout='row wrap' fxLayoutAlign="space-around center">
+    <mat-card fxFlex="33" *ngFor="let season of seasons$ | async ">
+      <mat-card-header>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <mat-card-title>{{season.especie}}</mat-card-title>
+        <mat-card-subtitle>Temporada {{season.temporada}}</mat-card-subtitle>
+        <div fxFlex></div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="sync(season.id)">
+            <mat-icon>sync</mat-icon>
+            <span>Sincronizar con planillas</span>
+          </button>
+        </mat-menu>
+      </mat-card-header>
+      <img *ngIf=" !(loading$ | async)" mat-card-image [src]="season.mainPic" style="height: 300px;" alt="Photo of a Shiba Inu">
+      <mat-card-content style="text-align: center;">
+        <mat-spinner *ngIf="(loading$ | async)"></mat-spinner>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <!-- <div fxFlex></div> -->
+        <button mat-button (click)="goToSpecie(season.id)">IR</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
+<!-- 9f8e94c4-1d9f-4420-863c-327dca8dc513.png -->

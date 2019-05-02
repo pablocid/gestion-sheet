@@ -1,0 +1,503 @@
+<mat-spinner *ngIf="loading$ | async"></mat-spinner>
+<div class="flex-p" id="contentToConvert" *ngIf="!(loading$ | async) && (activeId$ | async)">
+    <mat-card>
+        <mat-card-header fxLayoutAlign="center center">
+            <mat-card-subtitle>
+                <h2>{{nectarin.cultivar}} - {{nectarin.temporada}}</h2>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-tab-group>
+                <mat-tab label="General">
+                    <div fxLayout="row wrap" fxLayout.xs="column">
+                        <div fxFlex="33.3" class="flex-p">
+                            <mat-card class="draggable">
+                                <mat-card-content class="text-center">
+                                    <p>Especie</p>
+                                    <h2>{{ nectarin.especie}}</h2>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div fxFlex="33.3" class="flex-p">
+                            <mat-card class="draggable">
+                                <mat-card-content class="text-center">
+                                    <p>Programa</p>
+                                    <h2>{{nectarin.programa}}</h2>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div fxFlex="33.3" class="flex-p">
+                            <mat-card class="draggable">
+                                <mat-card-content class="text-center">
+                                    <p>Temporada</p>
+                                    <h2>{{ nectarin.temporada}}</h2>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                        <div fxFlex="33.3" class="flex-p">
+                            <mat-card class="draggable">
+                                <mat-card-content class="text-center">
+                                    <p>Estatus evaluativo</p>
+                                    <h2>{{nectarin.status_evaluativo}}</h2>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+
+                </mat-tab>
+                <mat-tab [label]="nectarin.centroName(i)" *ngFor="let centro of nectarin.centros; let i = index;">
+                    <mat-tab-group>
+                        <mat-tab label="General">
+                            <div fxLayout="row wrap" fxLayout.xs="column">
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card class="draggable">
+                                        <mat-card-content class="text-center">
+                                            <p>Portainjerto</p>
+                                            <h2>{{nectarin.centroProp('portainjerto', i)}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card class="draggable">
+                                        <mat-card-content class="text-center">
+                                            <p>Plantas por hectárea</p>
+                                            <h2>{{nectarin.centroProp('plantas_ha',i)}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card class="draggable">
+                                        <mat-card-content class="text-center">
+                                            <p>Año de plantación</p>
+                                            <h2>{{nectarin.centroProp('ano_plantacion',i)}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card class="draggable">
+                                        <mat-card-content class="text-center">
+                                            <p>Primera cosecha</p>
+                                            <h2>{{nectarin.inicioCosecha(i) | date:'yyyy/M/d'}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card class="draggable">
+                                        <mat-card-content class="text-center">
+                                            <p>Inicio de floración</p>
+                                            <h2>{{nectarin.inicioFloracion(i) | date:'yyyy/M/d'}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card class="draggable">
+                                        <mat-card-content class="text-center">
+                                            <p>Plena flor</p>
+                                            <h2>{{nectarin.plenaFloracion(i) | date:'yyyy/M/d'}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card class="draggable">
+                                        <mat-card-content class="text-center">
+                                            <p>Número de ramillas promedio</p>
+                                            <h2>{{nectarin.numeroRamillas(i) | number: '1.0-1'}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card class="draggable">
+                                        <mat-card-content class="text-center">
+                                            <p>Número de frutos por planta</p>
+                                            <h2>{{nectarin.numeroFrutosPlanta(i) | number: '1.0-1'}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card class="draggable">
+                                        <mat-card-content class="text-center">
+                                            <p>Vigor de la planta</p>
+                                            <h2>{{nectarin.vigor(i)}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card class="draggable">
+                                        <mat-card-content class="text-center">
+                                            <p>Flores por metro lineal</p>
+                                            <h2>{{nectarin.floresPorMetroLineal(i) | number: '1.0-1'}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card>
+                                        <mat-card-content class="text-center">
+                                            <p>Fruto cuajado por metro lineal</p>
+                                            <h2>{{nectarin.frutosCuajadosPorMetroLineal(i) | number: '1.0-1'}}</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card>
+                                        <mat-card-content class="text-center">
+                                            <p>Rendimiento</p>
+                                            <h2>{{nectarin.rendimientoTotal(i) | number: '1.0-1'}} (ton brutas/ha)</h2>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card>
+                                        <mat-card-content class="text-center">
+                                            <p>Fotos de floración</p>
+
+                                            <div class="thumbnail" *ngFor="let foto of nectarin.fotosPrecosecha(i, 'floracion')">
+                                                <img style="cursor: ponter;" (click)="openDialog(foto)" [src]="foto.thumbnail"
+                                                    alt="foto.description" />
+                                            </div>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card>
+                                        <mat-card-content class="text-center">
+                                            <p>Fotos de cuaja</p>
+                                            <div class="thumbnail" *ngFor="let foto of nectarin.fotosPrecosecha(i, 'cuaja')">
+                                                <img style="cursor: ponter;" (click)="openDialog(foto)" [src]="foto.thumbnail"
+                                                    alt="foto.description" />
+                                            </div>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card>
+                                        <mat-card-content class="text-center">
+                                            <p>Fotos de raleo</p>
+                                            <div class="thumbnail" *ngFor="let foto of nectarin.fotosPrecosecha(i, 'raleo')">
+                                                <img style="cursor: ponter;" (click)="openDialog(foto)" [src]="foto.thumbnail"
+                                                    alt="foto.description" />
+                                            </div>
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card>
+                                        <mat-card-content class="text-center">
+                                            <p>Distribución de monitoreo de presiones</p>
+                                            <button mat-icon-button (click)="openMonitoreoPresiones(nectarin.monitoreoGraphData(i))">
+                                                <mat-icon class="icon-lg">timeline</mat-icon>
+                                            </button>
+
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                                <div fxFlex="33.3" class="flex-p">
+                                    <mat-card>
+                                        <mat-card-content class="text-center">
+                                            <p>Distribución general de calibres (todas las cosechas)</p>
+                                            <button mat-icon-button (click)="openGraphDialog(nectarin.allCalibreGraphData(i))">
+                                                <mat-icon class="icon-lg">timeline</mat-icon>
+                                            </button>
+
+                                        </mat-card-content>
+                                    </mat-card>
+                                </div>
+                            </div>
+
+                        </mat-tab>
+                        <mat-tab [label]="'Cosecha del '+ (nectarin.fechaCosecha(i,ic) | date:'yyyy/M/d')" *ngFor="let cosecha of nectarin.cosechas(i); let ic = index;">
+                            <mat-tab-group>
+                                <mat-tab label="General">
+                                    <div fxLayout="row wrap" fxLayout.xs="column">
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Frutos exportables</p>
+                                                    <h2>{{nectarin.frutosExportables(i, ic)  | number : '1.0-1' }}%</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Forma del fruto</p>
+                                                    <h2>{{nectarin.cosechaProp('forma_fruto', i, ic)}}</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Sobre color</p>
+                                                    <h2>{{nectarin.cosechaProp('porcentage_color', i, ic)}}%</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Color de la pulpa</p>
+                                                    <h2>{{nectarin.cosechaProp('color_pulpa', i, ic)}}</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Textura del fruto</p>
+                                                    <h2>{{nectarin.cosechaProp('textura', i, ic)}}</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Observaciones</p>
+                                                    <h5>{{nectarin.cosechaProp('observaciones', i, ic)}}</h5>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Sabor</p>
+                                                    <h2>{{nectarin.cosechaProp('sabor', i, ic)}}</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Peso promedio del fruto</p>
+                                                    <h2>{{nectarin.pesoFruto(i,ic) | number : '1.0-1'}} gr.</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Calibre del fruto</p>
+                                                    <h2>{{nectarin.calibre(i,ic)}}</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Presión ecuatorial</p>
+                                                    <h2>{{nectarin.presionEcuatorial(i,ic) | number : '1.0-1'}} lb</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Punto más blando</p>
+                                                    <h2> {{nectarin.puntoMasBlando(i,ic)?.value | number: '1.0-1'}} lb
+                                                        ({{nectarin.puntoMasBlando(i,ic)?.index}}) </h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Sólidos solubles del fruto</p>
+                                                    <h2>{{nectarin.brix(i,ic) | number: '1.0-1'}} ºBrix</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Acidez del fruto</p>
+                                                    <h2>{{nectarin.acidez(i,ic) | number: '1.0-1'}}% (ác. málico)</h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content>
+                                                    <p class="text-center">Daños y defectos</p>
+                                                    <ul>
+                                                        <li style="margin-left: 15px;" *ngFor="let defecto of nectarin.defectosCosecha(i,ic)">
+                                                            {{defecto.id}}: {{defecto.value | percent}}
+                                                        </li>
+                                                    </ul>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Fotos defectos</p>
+                                                    <div class="thumbnail" *ngFor="let foto of nectarin.fotosDefectosCosecha(i, ic)">
+                                                        <img (click)="openDialog(foto)" [src]="foto.thumbnail" alt="foto.description" />
+                                                    </div>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Fotos de cosecha</p>
+                                                    <div class="thumbnail" *ngFor="let foto of nectarin.fotosCosecha(i, ic)">
+                                                        <img (click)="openDialog(foto)" [src]="foto.thumbnail" alt="foto.description" />
+                                                    </div>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Distribución de calibres</p>
+                                                    <button mat-icon-button (click)="openGraphDialog(nectarin.calibreGraphData(i,ic)) ">
+                                                        <mat-icon class="icon-lg">timeline</mat-icon>
+                                                    </button>
+
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+
+                                    </div>
+
+                                </mat-tab>
+
+                                <mat-tab [label]="'Post-cosecha del '+ (nectarin.fechaSalidaFrio(i,ic, ipc) | date:'yyyy/M/d')"
+                                    *ngFor="let postcosecha of nectarin.postcosechas(i,ic); let ipc = index;">
+                                    <div fxLayout="row wrap" fxLayout.xs="column">
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Salida de frío</p>
+                                                    <h2>
+                                                        {{nectarin.fechaSalidaFrio(i,ic, ipc) | date:'yyyy/M/d'}}
+                                                    </h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Fecha de evaluación</p>
+                                                    <h2>
+                                                        {{nectarin.fechaEvaluacionSalidaFrio(i,ic, ipc) |
+                                                        date:'yyyy/M/d'}}
+                                                    </h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Días a temperatura ambiente</p>
+                                                    <h2>
+                                                        {{nectarin.shelflife(i,ic, ipc)}}
+                                                    </h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Guarda (0ºC)</p>
+                                                    <h2>
+                                                        {{nectarin.diasGuarda(i,ic,ipc)}} días
+                                                    </h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Número de muestras evaluadas</p>
+                                                    <h2>
+                                                        {{nectarin.postcosechaProp('n_muestra', i,ic,ipc)}}
+                                                    </h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Presión ecuatorial</p>
+                                                    <h2>
+                                                        {{nectarin.presionEcuatorialPostcosecha(i,ic,ipc) | number:
+                                                        '1.0-1'}} lb
+                                                    </h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Punto mas blando</p>
+                                                    <h2>
+                                                        {{nectarin.puntoMasBlandoPostcosecha(i,ic,ipc)?.value |
+                                                        number: '1.0-1'}} lb
+                                                        ({{nectarin.puntoMasBlandoPostcosecha(i,ic,ipc)?.index}} )
+                                                    </h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Sólidos solubles</p>
+                                                    <h2>
+                                                        {{nectarin.brixPost(i,ic,ipc) | number: '1.0-1'}}ºBrix
+                                                    </h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Acidez</p>
+                                                    <h2>
+                                                        {{nectarin.acidezPost(i,ic,ipc) | number: '1.0-1'}}% (ác.
+                                                        málico)
+                                                    </h2>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content>
+                                                    <p class="text-center">Daños y defectos</p>
+                                                    <ul>
+                                                        <li style="margin-left: 15px;" *ngFor="let defecto of nectarin.defectosPostcosecha(i,ic,ipc)">
+                                                            {{defecto.id}}: {{defecto.value | percent}}
+                                                        </li>
+                                                    </ul>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                        <div fxFlex="33.3" class="flex-p">
+                                            <mat-card>
+                                                <mat-card-content class="text-center">
+                                                    <p>Fotos </p>
+                                                    <div class="thumbnail" *ngFor="let foto of nectarin.fotosPostcosecha(i,ic,ipc)">
+                                                        <img (click)="openDialog(foto)" [src]="foto.thumbnail" alt="foto.description" />
+                                                    </div>
+                                                </mat-card-content>
+                                            </mat-card>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                            </mat-tab-group>
+                        </mat-tab>
+
+                        <mat-tab label="Imprimir Versión extendida">
+                            <app-variety-print [nectarin]="nectarin" [i]="i"></app-variety-print>
+                        </mat-tab>
+                        <mat-tab label="Imprimir Versión reducida">
+                            <app-variety-prin-short [nectarin]="nectarin" [i]="i"></app-variety-prin-short>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayout.gt-sm="row wrap">
+    <div fxFlex="100" class="flex-p">
+        <mat-card>
+            <mat-card-header fxLayoutAlign="space-between center">
+                <mat-card-title>{{data.momento | uppercase}}</mat-card-title>
+                <mat-card-subtitle>{{data.description | uppercase}}</mat-card-subtitle>
+                <button (click)="close()" mat-icon-button>
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-card-header>
+            <img mat-card-image [src]="data.url">
+        </mat-card>
+    </div>
+</div>
