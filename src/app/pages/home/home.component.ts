@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionService } from 'src/app/store/session';
-import { VarietyService, VarietyQuery } from 'src/app/store/variety';
 import { Router } from '@angular/router';
+import { StitchService } from 'src/app/services/stitch/stitch.service';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +10,12 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private stitch: StitchService
   ) { }
 
   ngOnInit() {
+
   }
 
   logout() {

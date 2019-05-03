@@ -17,9 +17,10 @@ export class SeasonService {
   }
 
   async get() {
-    const response = await this.stitch.imageList();
-    console.log(response);
+    // const response = await this.stitch.imageList();
+    // console.log(response);
     const data = await this.stitch.client.callFunction('getSeasons', ['Nectarines', 'temporada']);
+    console.log(data);
     this.seasonsStore.set(data);
     return true;
   }
@@ -28,7 +29,8 @@ export class SeasonService {
     this.seasonsStore.setLoading(true);
     let error = false;
     try {
-      await this.stitch.lambda(syncfunctionName, { _id });
+      const result = await this.stitch.client.callFunction('syncWithSheet', [_id]);
+      console.log('result', result);
     } catch (e) {
       error = true;
       console.log(e);
