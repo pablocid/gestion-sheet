@@ -3,13 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
+    "start": "ng serve & ngtw watch",
+    "build": "ngtw build && ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deployS3": "aws s3 rm s3://ana.agroinformatica.cl --recursive && aws s3 cp ./dist/ana-desk s3://ana.agroinformatica.cl --recursive --acl public-read",
-    "bd": "npm run build && npm run deployS3"
+    "deployS3": "aws s3 rm s3://x.agroinformatica.cl --recursive && aws s3 cp ./dist/ana-desk s3://x.agroinformatica.cl --recursive --acl public-read",
+    "bd": "npm run build && npm run deployS3",
+    "prestart": "ngtw build"
   },
   "private": true,
   "dependencies": {
@@ -68,6 +69,7 @@
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.4.0",
+    "tailwindcss": "^0.7.4",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.6"
